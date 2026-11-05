@@ -32,10 +32,12 @@ boxes.forEach((box) =>{
     box.addEventListener("click", () =>{
         if(turnO) {
             box.innerText = "O";
+            box.classList.add("player-O");
             turnO = false;
             count++;
         }else{
             box.innerText = "X";
+            box.classList.add("player-X");
             turnO = true;
             count++;
         }
@@ -53,6 +55,7 @@ const enableBoxes =() =>{
     for(let box of boxes){
         box.disabled = false;
         box.innerText = "";
+        box.classList.remove("player-O", "player-X", "Winner");
     }
 };
 const showWinner = (winner) =>{
@@ -70,6 +73,9 @@ const checkWinner = () =>{
 
         if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
             if(pos1Val === pos2Val && pos2Val === pos3Val){
+                boxes[pattern[0]].classList.add("Winner");
+                boxes[pattern[1]].classList.add("Winner");
+                boxes[pattern[2]].classList.add("Winner");
                 showWinner(pos1Val);
                 return;
             }
