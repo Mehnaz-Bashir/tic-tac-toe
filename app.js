@@ -24,11 +24,8 @@ const resetGame = () =>{
     msgContainer.classList.add("hide");
 };
 
-
-
 boxes.forEach((box) =>{
     box.addEventListener("click", () =>{
-        console.log("box was clicked");
         if(turnO) {
             box.innerText = "O";
             turnO = false;
@@ -37,20 +34,18 @@ boxes.forEach((box) =>{
             turnO = true;
         }
         box.disabled = true;
-
-
         checkWinner();
     });
 });
 
-const disableBoxes =() =>{
+const disableBoxes =() =>{   // after winner, buttons should disable 
     for(let box of boxes){
         box.disabled = true;
     }
 };
 const enableBoxes =() =>{
     for(let box of boxes){
-        box.enableBoxes = false;
+        box.disabled = false;
         box.innerText = "";
     }
 };
@@ -68,11 +63,13 @@ const checkWinner = () =>{
 
         if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
             if(pos1Val === pos2Val && pos2Val === pos3Val){
-                console.log("WINNER", pos1Val);
                 showWinner(pos1Val);
             }
         }
     }
 };
+
+newGameBtn.addEventListener("click", resetGame);
+resetBtn.addEventListener("click", resetGame);
 
 
